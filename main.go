@@ -16,7 +16,7 @@ func main() {
 		log.Println(err)
 	}
 
-	scheme := config.GetScheme("post", "local", "yaml", "./config.yaml")
+	scheme := config.GetScheme("testdb", "local", "yaml", "./config.yaml")
 
 	sourceDriver, err := migrate.CreateRiceBoxSourceDriver()
 	if err != nil {
