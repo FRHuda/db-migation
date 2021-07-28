@@ -28,7 +28,7 @@ func main() {
 	} else {
 		if scheme.Migration != 0 {
 			log.Println("running postgres migrations")
-			v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationStaging, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+			v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
 			log.Printf("Migration done, do migration = %v, version = %v\n", cond, v)
 		}
 	}
