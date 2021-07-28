@@ -15,7 +15,7 @@ type Config struct {
 	DbMigration *DbMigration
 }
 type DbMigration struct {
-	DSNMigrationLocal      string `env:"POST_MIGRATE_DSN_STAGING,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
+	DSNMigrationLocal      string `env:"POST_MIGRATE_DSN_LOCAL,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
 	DSNMigrationStaging    string `env:"POST_MIGRATE_DSN_STAGING,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
 	DSNMigrationProduction string `env:"POST_MIGRATE_DSN_PRODUCTION,default=postgres://postgres@localhost:5432/sellfazz?sslmode=disable"`
 	SourceMigrationName    string `env:"POST_DB_SOURCE_MIGRATION_NAME,default=go.rice"`

@@ -24,6 +24,7 @@ func main() {
 	}
 
 	log.Println("schema migration = ", scheme.Migration)
+	log.Println("secret dsn= ", c.DbMigration.DSNMigrationLocal)
 
 	if sourceDriver == nil {
 		log.Println("cannot running database migration, cause the source driver is not supplied")
