@@ -23,13 +23,15 @@ func main() {
 		log.Println(err)
 	}
 
+	log.Println("schema migration = ", scheme.Migration)
+
 	if sourceDriver == nil {
 		log.Println("cannot running database migration, cause the source driver is not supplied")
 	} else {
 		if scheme.Migration != 0 {
 			log.Println("running postgres migrations")
-			v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
-			log.Printf("Migration done, do migration = %v, version = %v\n", cond, v)
+			// v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+			// log.Printf("Migration done, do migration = %v, version = %v\n", cond, v)
 		}
 	}
 }
