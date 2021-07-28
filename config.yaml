@@ -1,12 +1,12 @@
 local:
   - name: "testdb"
     scheme:
-      migration: 20210630141018
+      migration: 1
 staging:
   - name: "testdb"
     scheme:
-      migration: 2
+      migration: 1
 production:
   - name: "testdb"
     scheme:
-      migration: 3
+      migration: 1
