@@ -1,12 +1,20 @@
 package model
 
+type Environtment string
+
 const (
-	EnvProd    = "production"
-	EnvStaging = "staging"
-	EnvLocal   = "local"
-	TypeYaml   = "yaml"
-	TypeJson   = "json"
+	EnvProd    Environtment = "production"
+	EnvStaging Environtment = "staging"
+	EnvLocal   Environtment = "local"
+	TypeYaml                = "yaml"
+	TypeJson                = "json"
 )
+
+var Environtments = []Environtment{
+	EnvLocal,
+	EnvStaging,
+	EnvProd,
+}
 
 type Config struct {
 	Production []Service `json:"production" yaml:"production"`
@@ -16,6 +24,7 @@ type Config struct {
 
 type Service struct {
 	Name   string `yaml:"name" json:"name"`
+	Enable bool   `yaml:"enable" json:"enable"`
 	Scheme Scheme `yaml:"scheme" json:"scheme"`
 }
 

@@ -15,9 +15,9 @@ type Config struct {
 	DbMigration *DbMigration
 }
 type DbMigration struct {
-	DSNMigrationLocal      string `env:"POST_MIGRATE_DSN_LOCAL,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
-	DSNMigrationStaging    string `env:"POST_MIGRATE_DSN_STAGING,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
-	DSNMigrationProduction string `env:"POST_MIGRATE_DSN_PRODUCTION,default=postgres://postgres@localhost:5432/sellfazz?sslmode=disable"`
+	DSNMigrationLocal      string `env:"DSN_LOCAL,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
+	DSNMigrationStaging    string `env:"DSN_STAGING,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
+	DSNMigrationProduction string `env:"DSN_PRODUCTION,default=postgres://postgres@localhost:5432/sellfazz?sslmode=disable"`
 	SourceMigrationName    string `env:"POST_DB_SOURCE_MIGRATION_NAME,default=go.rice"`
 }
 
@@ -25,7 +25,7 @@ func Process(c *Config) error {
 	return envconfig.Process(context.Background(), c)
 }
 
-func GetScheme(service string, env string, configType string, configLocation string) *model.Scheme {
+func GetScheme(service string, env model.Environtment, configType string, configLocation string) *model.Scheme {
 	var err error
 
 	if configType == "" {

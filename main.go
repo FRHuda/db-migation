@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"db-migration/config"
+	"db-migration/config/model"
 	"db-migration/pkg/migrate"
 )
 
@@ -16,23 +17,34 @@ func main() {
 		log.Println(err)
 	}
 
-	scheme := config.GetScheme("testdb", "local", "yaml", "./config.yaml")
-
 	sourceDriver, err := migrate.CreateRiceBoxSourceDriver()
 	if err != nil {
 		log.Println(err)
 	}
 
-	log.Println("schema migration = ", scheme.Migration)
-	log.Println("secret dsn= ", c.DbMigration.DSNMigrationLocal)
+	for _, env := range model.Environtments {
+		scheme := config.GetScheme("testdb", env, "yaml", "./config.yaml")
 
-	if sourceDriver == nil {
-		log.Println("cannot running database migration, cause the source driver is not supplied")
-	} else {
-		if scheme.Migration != 0 {
-			log.Println("running postgres migrations")
-			// v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
-			// log.Printf("Migration done, do migration = %v, version = %v\n", cond, v)
+		if sourceDriver == nil {
+			log.Println("cannot running database migration, cause the source driver is not supplied")
+		} else {
+			if scheme != nil && scheme.Migration != 0 {
+				log.Printf("running postgres migrations on %v environment\n", env)
+
+				switch env {
+				case model.EnvLocal:
+					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				case model.EnvStaging:
+					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationStaging, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				case model.EnvProd:
+					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationProduction, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				}
+
+			}
 		}
 	}
+
 }
