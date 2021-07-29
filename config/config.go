@@ -18,7 +18,7 @@ type DbMigration struct {
 	DSNMigrationLocal      string `env:"DSN_LOCAL,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
 	DSNMigrationStaging    string `env:"DSN_STAGING,default=host=localhost port=5432 database=testdb user=postgres password=postgres sslmode=disable"`
 	DSNMigrationProduction string `env:"DSN_PRODUCTION,default=postgres://postgres@localhost:5432/sellfazz?sslmode=disable"`
-	SourceMigrationName    string `env:"POST_DB_SOURCE_MIGRATION_NAME,default=go.rice"`
+	SourceMigrationName    string `env:"SOURCE_MIGRATION_NAME,default=go.rice"`
 }
 
 func Process(c *Config) error {
