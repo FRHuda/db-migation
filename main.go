@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"db-migration/config"
@@ -30,18 +31,18 @@ func main() {
 		} else {
 			if scheme != nil && scheme.Migration != 0 {
 				log.Printf("running postgres migrations on %v environment\n", env)
-
-				switch env {
-				case model.EnvLocal:
-					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
-					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
-				case model.EnvStaging:
-					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationStaging, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
-					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
-				case model.EnvProd:
-					v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationProduction, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
-					log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
-				}
+				fmt.Println(c.DbMigration.DSNMigrationLocal)
+				// switch env {
+				// case model.EnvLocal:
+				// 	v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+				// 	log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				// case model.EnvStaging:
+				// 	v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationStaging, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+				// 	log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				// case model.EnvProd:
+				// 	v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationProduction, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
+				// 	log.Printf("Migration done on %v environment, do migration = %v, version = %v\n", env, cond, v)
+				// }
 
 			}
 		}
