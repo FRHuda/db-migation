@@ -32,7 +32,7 @@ func main() {
 			if scheme != nil && scheme.Migration != 0 {
 				log.Printf("running postgres migrations on %v environment\n", env)
 				for _, char := range c.DbMigration.DSNMigrationLocal {
-					fmt.Print(string(char))
+					fmt.Println(string(char))
 				}
 				// switch env {
 				// case model.EnvLocal:
