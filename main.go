@@ -31,7 +31,9 @@ func main() {
 		} else {
 			if scheme != nil && scheme.Migration != 0 {
 				log.Printf("running postgres migrations on %v environment\n", env)
-				fmt.Println(c.DbMigration.DSNMigrationLocal)
+				for _, char := range c.DbMigration.DSNMigrationLocal {
+					fmt.Println(char)
+				}
 				// switch env {
 				// case model.EnvLocal:
 				// 	v, cond := migrate.DoMigrate(c.DbMigration.DSNMigrationLocal, c.DbMigration.SourceMigrationName, sourceDriver, &scheme.Migration)
