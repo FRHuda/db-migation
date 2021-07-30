@@ -21,6 +21,4 @@ jobs:
     - name: Run
       run: go run main.go
       env:
-        POST_MIGRATE_DSN_LOCAL: ${{ secrets.POST_MIGRATE_DSN_LOCAL}}
-        IMAGE_TAG: ${{ steps.docker_image_tag_generator.outputs.tag }}
-        ARGOWF_AUTH_DEPLOYER_K8SDEV0: ${{ secrets.ARGOWF_AUTH_DEPLOYER_K8SDEV0 }}
+        DSN_LOCAL: ${{ secrets.DSN_LOCAL}}
