@@ -5,8 +5,8 @@ local:
 staging:
   - name: "testdb"
     scheme:
-      migration: 1
+      migration: 0
 production:
   - name: "testdb"
     scheme:
-      migration: 1
+      migration: 0
